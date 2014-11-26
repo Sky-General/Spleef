@@ -1,0 +1,9 @@
+name: Spleef
+description: Knock out the blocks under other players, and don't fall in the lava!
+author: Sky_General109
+version: 1.0.1
+main: me.skyGeneral.spleef.Main
+commands:
+  spleef:
+    description: Spleef Command
+    usage: /spleef
