@@ -37,11 +37,12 @@ public class ListenerClass implements Listener {
 	}
 	@EventHandler
 	public void onPlayerChangeBlock(BlockBreakEvent e){
-		if(Utils.inGame(e.getPlayer().getUniqueId())){
+		if(e.getBlock().getType().equals(Material.STAINED_CLAY) && Utils.inGame(e.getPlayer().getUniqueId()) && Utils.getSpleefPlayer(e.getPlayer().getUniqueId()).getArena().hasStarted()){
 			SpleefPlayer splayer = Utils.getSpleefPlayer(e.getPlayer().getUniqueId());
 			Arena arena = splayer.getArena();
 			arena.updateBlocks(e.getBlock().getState());
 		}
+		else e.setCancelled(true);
 	}
 	@EventHandler
 	public void onSignEdit(SignChangeEvent e){
@@ -71,9 +72,8 @@ public class ListenerClass implements Listener {
 	}
 	@EventHandler
 	public void onBlockDamager(BlockDamageEvent e){
-		if(e.getBlock().getType().equals(Material.STAINED_CLAY) && Utils.inGame(e.getPlayer().getUniqueId())){
-				e.setInstaBreak(true);
-		}
+		if(e.getBlock().getType().equals(Material.STAINED_CLAY) && Utils.inGame(e.getPlayer().getUniqueId()) && Utils.getSpleefPlayer(e.getPlayer().getUniqueId()).getArena().hasStarted()) e.setInstaBreak(true);
+		else e.setCancelled(true);
 	}
 	@EventHandler
 	public void onPlayerInteractEvent(PlayerInteractEvent e){
